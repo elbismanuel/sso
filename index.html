@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SPOT | Sistema de Prospectos y Observación de Talento</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intro.js@7.2.0/minified/introjs.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/intro.js@7.2.0/minified/intro.min.js"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+	<style>
+		body,
+		html {
+			margin: 0;
+			padding: 0;
+			height: 100vh;
+			font-family: 'Poppins', sans-serif;
+		}
+
+		.modal {
+			display: none;
+			position: fixed;
+			z-index: 99999;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.9);
+			padding: 20px;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.modal-content {
+			max-width: 90%;
+			max-height: 90vh;
+			object-fit: contain;
+		}
+
+		.modal-close {
+			position: absolute;
+			top: 20px;
+			right: 30px;
+			color: #fff;
+			font-size: 30px;
+			cursor: pointer;
+			width: 40px;
+			height: 40px;
+			background: rgba(255, 255, 255, 0.1);
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: all 0.3s ease;
+		}
+
+		.modal-close:hover {
+			background: rgba(255, 255, 255, 0.2);
+			transform: rotate(90deg);
+		}
+
+		.tour-button {
+			background: linear-gradient(45deg, #FFA500, #FFD700);
+			border: none;
+			color: white;
+			padding: 12px 24px;
+			border-radius: 50px;
+			font-weight: 600;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			box-shadow: 0 4px 15px rgba(255, 165, 0, 0.3);
+		}
+
+		.tour-button:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 6px 20px rgba(255, 165, 0, 0.4);
+		}
+
+		.flow-link {
+			color: #3b82f6;
+			text-decoration: underline;
+			cursor: pointer;
+			margin-top: 10px;
+			display: inline-block;
+		}
+	</style>
+</head>
+
+<body>
+	<div
+		class="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-blue-50 flex flex-col p-8 relative overflow-hidden">
+		<!-- Banner informativo actualizado -->
+		<div class="mb-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r">
+			<div class="flex">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+					stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+					class="lucide lucide-info h-5 w-5 text-blue-500 flex-shrink-0">
+					<circle cx="12" cy="12" r="10"></circle>
+					<path d="M12 16v-4"></path>
+					<path d="M12 8h.01"></path>
+				</svg>
+				<div class="ml-3">
+					<h3 class="text-sm font-medium text-blue-800">Información sobre SSO (Single Sign-On)</h3>
+					<p class="text-sm text-blue-700"><strong>Aviso importante:</strong> Esta guía muestra el proceso de
+						integración con el Portal Único del Ciudadano, permitiendo implementar la verificación de identidad mediante
+						el sistema SSO.</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- Efectos de fondo -->
+		<div
+			class="absolute top-0 right-0 w-[800px] h-[800px] bg-emerald-100 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl opacity-20">
+		</div>
+		<div
+			class="absolute bottom-0 left-0 w-[800px] h-[800px] bg-blue-100 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl opacity-20">
+		</div>
+
+		<div class="flex items-center gap-2 mb-8 relative z-10">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+				stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+				class="lucide lucide-binoculars w-6 h-6 text-blue-600">
+				<path d="M10 10h4"></path>
+				<path d="M19 7V4a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v3"></path>
+				<path d="M20 21a2 2 0 0 0 2-2v-3.851c0-1.39-2-2.962-2-4.829V8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v11a2 2 0 0 0 2 2z">
+				</path>
+				<path d="M 22 16 L 2 16"></path>
+				<path d="M4 21a2 2 0 0 1-2-2v-3.851c0-1.39 2-2.962 2-4.829V8a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v11a2 2 0 0 1-2 2z">
+				</path>
+				<path d="M9 7V4a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1v3"></path>
+			</svg>
+			<span class="text-xl font-['Poppins'] font-semibold text-blue-600">SPOT</span>
+		</div>
+
+		<div class="bg-white rounded-3xl shadow-xl w-full max-w-6xl mx-auto p-8 relative z-10 flex-1 flex items-center">
+			<div class="w-full flex gap-8">
+				<!-- Columna izquierda -->
+				<div class="w-1/2">
+					<div class="bg-white rounded-2xl p-8 flex flex-col h-full">
+						<div class="flex-1">
+							<div class="text-left mb-8">
+								<h1 class="text-2xl font-['Poppins'] font-semibold text-gray-900 mb-2">¡Bienvenido!</h1>
+								<p class="text-gray-500 font-['Poppins'] text-sm">Accede a través del Portal Único</p>
+							</div>
+							<button
+								class="w-full bg-blue-600 text-white rounded-lg py-4 px-6 font-['Poppins'] hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed mb-6"
+								data-intro='Al hacer clic en este botón iniciarás el proceso de autenticación SSO. <br><br>Para ver el diagrama del flujo <a href="#" class="flow-link" onclick="openModal(event)">haz clic aquí</a>'
+								tabindex="0">
+								Iniciar Sesión con Portal Único
+							</button>
+						</div>
+						<div class="text-center pt-4 border-t border-gray-100">
+							<p class="text-sm text-gray-500 font-['Poppins']">Sistema de Prospectos y Observación de Talento</p>
+						</div>
+					</div>
+				</div>
+				<!-- Columna derecha -->
+				<div class="w-1/2 flex items-center justify-center">
+					<img src="img/login.png" alt="Login illustration" class="w-full max-w-md">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal para la imagen -->
+	<div id="imageModal" class="modal" onclick="closeModal()">
+		<span class="modal-close">×</span>
+		<img class="modal-content" id="modalImage" src="img/sso1.png">
+	</div>
+
+	<!-- Botón de tour -->
+	<button id="start-tour" class="tour-button fixed bottom-4 right-4 z-20">
+		<i class="fas fa-map-marked-alt"></i>
+		Iniciar Tour
+	</button>
+
+	<script>
+		let currentTour = null;
+let tourWasVisible = false;
+
+		function startTour() {
+
+			currentTour = null;
+
+			currentTour = introJs().setOptions({
+				showProgress: true,
+				showBullets: false,
+				exitOnOverlayClick: true,
+				exitOnEsc: true,
+				nextLabel: 'Entendido',
+				prevLabel: 'Anterior',
+				skipLabel: '<i class="fas fa-times"></i>',
+				doneLabel: 'Continuar',
+				tooltipClass: 'customTooltip'
+			}).oncomplete(function () {
+				window.location.href = 'login.html';
+			}).start();
+		}
+
+		function openModal(event) {
+			event.preventDefault();
+			event.stopPropagation();
+			const modal = document.getElementById('imageModal');
+			modal.style.display = "flex";
+	
+			// Guardar estado del tour
+			const intro = document.querySelector('.introjs-overlay');
+			tourWasVisible = intro && intro.style.display !== 'none';
+	
+			// Ocultar elementos del tour
+			const tooltips = document.querySelectorAll('.introjs-tooltip, .introjs-helperLayer, .introjs-tooltipReferenceLayer, .introjs-overlay');
+			tooltips.forEach(tooltip => {
+					if (tooltip) tooltip.style.display = 'none';
+			});
+	}
+	
+	function closeModal(event) {
+			if (event) {
+					event.stopPropagation();
+			}
+			document.getElementById('imageModal').style.display = "none";
+	
+			// Solo restaurar si el tour estaba visible
+			if (tourWasVisible) {
+					const tooltips = document.querySelectorAll('.introjs-tooltip, .introjs-helperLayer, .introjs-tooltipReferenceLayer, .introjs-overlay');
+					tooltips.forEach(tooltip => {
+							if (tooltip) tooltip.style.display = 'block';
+					});
+					
+					// Asegurar que el tour continúe
+					if (currentTour) {
+							currentTour.refresh();
+					}
+			}
+	}
+
+		document.addEventListener('keydown', function (event) {
+			if (event.key === "Escape") {
+				closeModal();
+			}
+		});
+
+		// Event listener para el botón de inicio del tour
+		document.getElementById('start-tour').addEventListener('click', startTour);
+
+		// Iniciar el tour automáticamente después de 1 segundo
+		document.addEventListener('DOMContentLoaded', function () {
+			setTimeout(startTour, 500);
+		});
+	</script>
+</body>
+
+</html>
